@@ -1,0 +1,17 @@
+# .NET and Visual Studio
+.vs
+bin
+obj
+.user
+.suo
+
+# NodeVite
+node_modules
+dist
+coverage
+
+# Local environment and secrets
+.env
+.env.
+!.env.example
+secrets.json

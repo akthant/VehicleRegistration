@@ -1,0 +1,163 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@VehicleRegistration.API_HostAddress = https://localhost:7287
+
+### ===================
+### VARIABLES
+### ===================
+@baseUrl = https://localhost:7287/api
+
+
+### ===================
+### MANUFACTURERS
+### ===================
+
+### Get all manufacturers
+GET {{baseUrl}}/manufacturers
+Content-Type: application/json
+
+
+### ===================
+### CATEGORIES
+### ===================
+
+### Get all categories
+GET {{baseUrl}}/categories
+Content-Type: application/json
+
+
+### Replace all categories
+PUT {{baseUrl}}/categories
+Content-Type: application/json
+
+{
+  "categories": [
+    { "name": "Light", "minWeight": 0.00, "maxWeight": 500.00, "iconUrl": "/icons/light.svg" },
+    { "name": "Medium", "minWeight": 500.01, "maxWeight": 2500.00, "iconUrl": "/icons/medium.svg" },
+    { "name": "Heavy", "minWeight": 2500.01, "maxWeight": null, "iconUrl": "/icons/heavy.svg" }
+  ]
+}
+
+
+### ===================
+### OWNERS
+### ===================
+
+### Get all owners
+GET {{baseUrl}}/owners
+Content-Type: application/json
+
+
+### Create owner
+POST {{baseUrl}}/owners
+Content-Type: application/json
+
+{
+  "name": "John Smith"
+}
+
+
+### ===================
+### VEHICLES
+### ===================
+
+### Get all vehicles
+GET {{baseUrl}}/vehicles
+Content-Type: application/json
+
+
+### Get vehicles sorted by weight
+GET {{baseUrl}}/vehicles?sortBy=weight&desc=true
+Content-Type: application/json
+
+
+### Create vehicle (Light category)
+POST {{baseUrl}}/vehicles
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "manufacturerId": 3,
+  "yearOfManufacture": 2022,
+  "weight": 450.50
+}
+
+
+### Create vehicle (Medium category)
+POST {{baseUrl}}/vehicles
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "manufacturerId": 1,
+  "yearOfManufacture": 2020,
+  "weight": 1500.00
+}
+
+
+### Create vehicle (Heavy category)
+POST {{baseUrl}}/vehicles
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "manufacturerId": 2,
+  "yearOfManufacture": 2023,
+  "weight": 3500.00
+}
+
+
+### Update vehicle
+PUT {{baseUrl}}/vehicles/1
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "manufacturerId": 3,
+  "yearOfManufacture": 2022,
+  "weight": 3000.00
+}
+
+
+### Delete vehicle
+DELETE {{baseUrl}}/vehicles/1
+
+
+### ===================
+### VALIDATION TESTS
+### ===================
+
+### Test: Negative weight (should fail)
+POST {{baseUrl}}/vehicles
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "manufacturerId": 1,
+  "yearOfManufacture": 2022,
+  "weight": -100.00
+}
+
+
+### Test: Invalid year (should fail)
+POST {{baseUrl}}/vehicles
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "manufacturerId": 1,
+  "yearOfManufacture": 1800,
+  "weight": 1000.00
+}
+
+
+### Test: Categories with gap (should fail)
+PUT {{baseUrl}}/categories
+Content-Type: application/json
+
+{
+  "categories": [
+    { "name": "Light", "minWeight": 0.00, "maxWeight": 500.00, "iconUrl": "/icons/light.svg" },
+    { "name": "Medium", "minWeight": 600.00, "maxWeight": 2500.00, "iconUrl": "/icons/medium.svg" },
+    { "name": "Heavy", "minWeight": 2500.01, "maxWeight": null, "iconUrl": "/icons/heavy.svg" }
+  ]
+}

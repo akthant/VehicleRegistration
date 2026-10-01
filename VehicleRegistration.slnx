@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/VehicleRegistration.IntegrationTests/VehicleRegistration.IntegrationTests.csproj" Id="93c88ab6-53eb-44a9-9093-5d4b61286ec4" />
+    <Project Path="tests/VehicleRegistration.UnitTests/VehicleRegistration.UnitTests.csproj" Id="335c05f2-fd59-47db-a5fd-a25553abdfbe" />
+  </Folder>
+  <Project Path="src/VehicleRegistration.Application/VehicleRegistration.Application.csproj" />
+  <Project Path="src/VehicleRegistration.Core/VehicleRegistration.Core.csproj" />
+  <Project Path="src/VehicleRegistration.Infrastructure/VehicleRegistration.Infrastructure.csproj" />
+  <Project Path="VehicleRegistration.API/VehicleRegistration.API.csproj" />
+</Solution>
